@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="kiln">
+  <title>常用中文互動對話指南｜台灣華語互動詞學習</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* 1. Kiln style tokens */
+      --background: #f4f1ea;
+      --surface-container-low: #ebe6db;
+      --surface-container: #e3ddd0;
+      --surface-container-high: #d9d1c2;
+      --surface-paper: #faf8f3;
+
+      --on-surface: #1c1b18;
+      --on-surface-variant: #5e5a51;
+
+      --outline: #1c1b18;
+      --outline-variant: #d2cbbd;
+
+      --primary: #1c1b18;
+      --on-primary: #f4f1ea;
+      --primary-container: #ebe6db;
+      --on-primary-container: #1c1b18;
+      --secondary: #4a5d46;
+      --secondary-soft: #e3eadf;
+      --tertiary: #9e3b2b;
+      --tertiary-soft: #f3e3df;
+      --error: #9e2a22;
+      --on-error: #f4f1ea;
+
+      --data-1: #4a5d46;
+      --data-2: #9e3b2b;
+      --data-3: #1c1b18;
+      --data-4: #8a6f48;
+      --data-context: #c7bfb0;
+
+      /* Fonts (Traditional Chinese primary with Kiln editorial pairing) */
+      --font-headline: 'Noto Serif TC', 'Shippori Mincho', serif;
+      --font-body: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', 'Noto Sans TC', monospace;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.125rem;
+      --rounded-full: 0.125rem;
+
+      /* Kiln rules & tracking */
+      --rule-sumi-left: 2px solid var(--outline);
+      --rule-moss-left: 2px solid var(--secondary);
+      --rule-cinnabar-left: 2px solid var(--tertiary);
+      --rule-sumi: 1px solid var(--outline);
+      --rule-linen: 1px solid var(--outline-variant);
+      --label-tracking: 0.12em;
+
+      /* 3. Shared tokens */
+      --positive: #4a5d46;
+      --warning: #8a6f48;
+      --focus: #1c1b18;
+
+      /* Dashboard / Explorer Type Scale */
+      --display-size: clamp(1.85rem, 1.45rem + 1.5vw, 2.5rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.55vw, 1.55rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.91rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-2xs: 0.125rem;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: static !important;
+    }
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * {
+      min-width: 0;
+    }
+
+    /* Header & Kiln Stamp */
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-lg);
+      border-bottom: var(--rule-sumi);
+    }
+    .masthead-copy {
+      max-width: 68ch;
+    }
+    .kicker {
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: var(--label-size);
+      letter-spacing: var(--label-tracking);
+      color: var(--secondary);
+      margin: 0 0 var(--space-xs);
+    }
+    .display-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--display-size);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .subhead-moss {
+      font-family: var(--font-headline);
+      font-weight: 500;
+      font-size: var(--subhead-size);
+      line-height: 1.45;
+      color: var(--secondary);
+      margin: var(--space-sm) 0 0;
+    }
+    .seal-stamp {
+      flex-shrink: 0;
+      border: 1px solid var(--tertiary);
+      color: var(--tertiary);
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.16em;
+      padding: var(--space-sm) var(--space-xs);
+      writing-mode: vertical-rl;
+      line-height: 1.2;
+      user-select: none;
+    }
+
+    /* Overview & TTS Control Strip */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: var(--space-md);
+      align-items: stretch;
+    }
+    .washi-card {
+      background: var(--surface-container-low);
+      border-left: var(--rule-sumi-left);
+      border-radius: var(--rounded);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .washi-card--moss {
+      border-left: var(--rule-moss-left);
+    }
+    .washi-card--cinnabar {
+      border-left: var(--rule-cinnabar-left);
+    }
+    .card-kicker {
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: var(--label-size);
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      margin: 0;
+    }
+    .stat-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .stat-value {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.95rem);
+      line-height: 1.1;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--on-surface);
+    }
+    .stat-note {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: var(--outline-variant);
+      border-radius: var(--rounded);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--secondary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* TTS Panel */
+    .tts-controls {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .tts-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: var(--space-sm);
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex: 1 1 180px;
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      letter-spacing: 0.04em;
+    }
+    .kiln-select,
+    .kiln-input {
+      height: 44px;
+      background: var(--surface-paper);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: 0 var(--space-md);
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+      transition: border-color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+    }
+    .kiln-select {
+      padding-right: var(--space-xl);
+    }
+    .kiln-select:hover,
+    .kiln-input:hover {
+      border-color: var(--on-surface-variant);
+    }
+    .kiln-select:focus,
+    .kiln-input:focus {
+      border-color: var(--outline);
+      background: var(--surface-paper);
+    }
+    .tts-status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+    .engine-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-2xs) var(--space-sm);
+      border: var(--rule-linen);
+      background: var(--surface-paper);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface);
+    }
+    .engine-pill--ok {
+      border-color: var(--secondary);
+      color: var(--secondary);
+      background: var(--secondary-soft);
+    }
+    .engine-pill--warn {
+      border-color: var(--tertiary);
+      color: var(--tertiary);
+      background: var(--tertiary-soft);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--rule-sumi);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--surface-container-high);
+    }
+    .btn:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      color: var(--on-primary);
+    }
+    .btn-moss {
+      background: var(--secondary-soft);
+      color: var(--secondary);
+      border-color: var(--secondary);
+    }
+    .btn-moss:hover:not(:disabled) {
+      background: var(--secondary);
+      color: var(--on-primary);
+    }
+    .btn-cinnabar {
+      background: var(--surface-paper);
+      color: var(--tertiary);
+      border-color: var(--tertiary);
+    }
+    .btn-cinnabar:hover:not(:disabled) {
+      background: var(--tertiary-soft);
+    }
+    .btn-ghost {
+      border-color: var(--outline-variant);
+      background: var(--surface-paper);
+      color: var(--on-surface-variant);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      border-color: var(--outline);
+      color: var(--on-surface);
+      background: var(--surface-container);
+    }
+    .btn.is-speaking {
+      background: var(--tertiary);
+      border-color: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .btn.is-active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-compact {
+      min-height: 44px;
+      padding: 0 var(--space-sm);
+      font-size: 0.8125rem;
+    }
+
+    /* Toolbar: Search & Filters */
+    .toolbar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-top: var(--rule-linen);
+      border-bottom: var(--rule-linen);
+    }
+    .toolbar-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: var(--space-md);
+    }
+    .search-group {
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .filter-chip {
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-paper);
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .filter-chip:hover {
+      border-color: var(--outline);
+      color: var(--on-surface);
+      background: var(--surface-container-low);
+    }
+    .filter-chip[aria-pressed="true"] {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .chip-count {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      opacity: 0.8;
+    }
+    .result-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Card Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .card-wrapper {
+      container-type: inline-size;
+    }
+    .phrase-card {
+      background: var(--surface-container-low);
+      border-left: var(--rule-sumi-left);
+      border-top: var(--rule-linen);
+      border-right: var(--rule-linen);
+      border-bottom: var(--rule-linen);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      transition: background-color var(--dur-short) var(--ease-out), border-left-color var(--dur-short) var(--ease-out);
+    }
+    .phrase-card.is-mastered {
+      border-left-color: var(--secondary);
+      background: var(--surface-paper);
+    }
+    .phrase-card.is-card-speaking {
+      border-left-color: var(--tertiary);
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .card-meta-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .index-tag {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-2xs) var(--space-sm);
+      border: var(--rule-linen);
+      border-radius: var(--rounded);
+      background: var(--surface-paper);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--secondary);
+    }
+    .mastery-btn {
+      min-height: 44px;
+      padding: 0 var(--space-sm);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-paper);
+      color: var(--on-surface-variant);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .mastery-btn:hover {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+    .mastery-btn[aria-pressed="true"] {
+      background: var(--secondary-soft);
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* Phrase Title & Audio */
+    .phrase-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: start;
+    }
+    .phrase-zh {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+      line-height: 1.25;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .phrase-pinyin {
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--secondary);
+      margin: var(--space-xs) 0 0;
+      transition: opacity var(--dur-micro) var(--ease-out);
+    }
+    .pinyin-hidden .phrase-pinyin {
+      opacity: 0.14;
+      filter: blur(4px);
+      user-select: none;
+    }
+    .phrase-card:hover.pinyin-hidden .phrase-pinyin {
+      opacity: 1;
+      filter: none;
+    }
+
+    /* Japanese Equivalent Box */
+    .jp-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-paper);
+      border: var(--rule-linen);
+      border-radius: var(--rounded);
+    }
+    .jp-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+    }
+    .jp-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      letter-spacing: 0.04em;
+    }
+    .jp-text {
+      font-family: var(--font-headline);
+      font-weight: 500;
+      font-size: 1.0625rem;
+      color: var(--on-surface);
+    }
+
+    /* Context Note */
+    .context-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .section-mini-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .context-text {
+      margin: 0;
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* A/B Dialogue Box */
+    .dialogue-box {
+      background: var(--surface-paper);
+      border: var(--rule-linen);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .dialogue-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      padding-bottom: var(--space-xs);
+      border-bottom: var(--rule-linen);
+    }
+    .dialogue-lines {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .dialogue-line {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: var(--space-sm);
+      align-items: center;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .dialogue-line.is-line-speaking {
+      background: var(--tertiary-soft);
+    }
+    .speaker-badge {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+    }
+    .speaker-badge--a {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .speaker-badge--b {
+      background: var(--secondary-soft);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+    .dialogue-utterance {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+    }
+    .dialogue-utterance mark {
+      background: var(--secondary-soft);
+      color: var(--on-surface);
+      padding: 0 var(--space-2xs);
+      font-weight: 600;
+    }
+    .line-play-btn {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 var(--space-xs);
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .line-play-btn:hover {
+      background: var(--surface-container-low);
+      border-color: var(--outline-variant);
+      color: var(--on-surface);
+    }
+    .line-play-btn.is-speaking {
+      background: var(--tertiary);
+      color: var(--on-primary);
+      border-color: var(--tertiary);
+    }
+
+    @container (max-width: 420px) {
+      .phrase-header {
+        grid-template-columns: 1fr;
+      }
+      .phrase-card {
+        padding: var(--space-md);
+      }
+    }
+
+    /* Empty State */
+    .empty-state {
+      background: var(--surface-container-low);
+      border-left: var(--rule-cinnabar-left);
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .empty-state h3 {
+      font-family: var(--font-headline);
+      margin: 0;
+      font-size: var(--headline-size);
+    }
+    .empty-state p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 56ch;
+    }
+
+    /* Practice Quiz Section */
+    .quiz-section {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-xl);
+      border-top: var(--rule-sumi);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+    .section-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--headline-size);
+      line-height: 1.25;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .section-desc {
+      margin: var(--space-xs) 0 0;
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+    }
+    .quiz-panel {
+      background: var(--surface-container-low);
+      border-left: var(--rule-moss-left);
+      border-top: var(--rule-linen);
+      border-right: var(--rule-linen);
+      border-bottom: var(--rule-linen);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .quiz-prompt-box {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .quiz-situation-line {
+      font-family: var(--font-headline);
+      font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.35rem);
+      font-weight: 500;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--on-surface);
+      padding: var(--space-md);
+      background: var(--surface-paper);
+      border: var(--rule-linen);
+      border-radius: var(--rounded);
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+    .quiz-opt-btn {
+      min-height: 52px;
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      background: var(--surface-paper);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      border-color: var(--outline);
+      background: var(--surface-container);
+    }
+    .quiz-opt-btn.is-correct {
+      background: var(--secondary-soft);
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+    .quiz-opt-btn.is-wrong {
+      background: var(--tertiary-soft);
+      border-color: var(--tertiary);
+      color: var(--tertiary);
+    }
+    .quiz-opt-main {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .quiz-opt-sub {
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+    .quiz-feedback {
+      margin-top: var(--space-sm);
+      padding: var(--space-md);
+      background: var(--surface-paper);
+      border-left: var(--rule-sumi-left);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .quiz-feedback.is-correct {
+      border-left-color: var(--secondary);
+    }
+    .quiz-feedback.is-wrong {
+      border-left-color: var(--tertiary);
+    }
+
+    /* Footer */
+    .page-footer {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: var(--rule-linen);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+
+    .icon-svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+      .quiz-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .masthead {
+        gap: var(--space-md);
+      }
+      .seal-stamp {
+        font-size: 0.75rem;
+        padding: var(--space-xs) 4px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+      .tts-row {
+        align-items: stretch;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header class="masthead">
+      <div class="masthead-copy">
+        <p class="kicker">TAIWAN MANDARIN · INTERACTIVE PHRASEBOOK</p>
+        <h1 class="display-title">常用中文互動對話指南</h1>
+        <p class="subhead-moss">收錄 10 個日語母語者最實用的台灣華語高頻反應詞——對照日語語感、情境提示與 A/B 雙語音實境對話</p>
+      </div>
+      <div class="seal-stamp" aria-hidden="true">互動詞拾選</div>
+    </header>
+
+    <!-- Top Summary & Speech Engine Controls -->
+    <section class="overview-grid" aria-label="學習進度與語音引擎設定">
+      <div class="washi-card washi-card--moss">
+        <div>
+          <p class="card-kicker">學習掌握進度</p>
+          <div class="stat-row">
+            <span class="stat-value" id="mastered-count">0 / 10</span>
+            <span class="stat-note" id="mastered-note">點擊卡片右上角標記已熟練</span>
+          </div>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="mastered-bar"></div>
+        </div>
+      </div>
+
+      <div class="washi-card">
+        <div class="tts-controls">
+          <div class="tts-row">
+            <div class="field-group">
+              <label class="field-label" for="zh-voice-select">台灣中文語音（強制 zh-TW）</label>
+              <select class="kiln-select" id="zh-voice-select" onchange="handleVoiceChange(this.value)">
+                <option value="">自動偵測台灣中文語音…</option>
+              </select>
+            </div>
+            <div class="field-group" style="flex: 0 1 130px;">
+              <label class="field-label" for="rate-select">朗讀語速</label>
+              <select class="kiln-select" id="rate-select" onchange="handleRateChange(this.value)">
+                <option value="0.8">慢速 0.8×</option>
+                <option value="0.95" selected>自然 0.95×</option>
+                <option value="1.1">流利 1.1×</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-cinnabar" id="stop-all-btn" onclick="stopSpeech()">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="6" width="12" height="12"></rect></svg>
+              停止朗讀
+            </button>
+          </div>
+          <div class="tts-status-bar" id="tts-status-bar">
+            <span class="engine-pill" id="zh-engine-pill">中文引擎：偵測中</span>
+            <span class="engine-pill" id="ja-engine-pill">日文引擎：偵測中</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="washi-card washi-card--cinnabar">
+        <div>
+          <p class="card-kicker">情境小測驗得分</p>
+          <div class="stat-row">
+            <span class="stat-value" id="quiz-score-display">0 / 0</span>
+            <span class="stat-note" id="quiz-accuracy-note">下方提供 10 題即測練習</span>
+          </div>
+        </div>
+        <div class="tts-row">
+          <button type="button" class="btn btn-ghost btn-compact" onclick="scrollToQuiz()">前往情境測驗</button>
+          <button type="button" class="btn btn-ghost btn-compact" id="reset-progress-btn" onclick="handleResetProgress(this)">重設紀錄</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Situation Filter Bar -->
+    <section class="toolbar-panel" aria-label="搜尋與情境篩選">
+      <div class="toolbar-top">
+        <div class="search-group">
+          <label class="field-label" for="search-input">搜尋互動詞、漢語拼音、日文對應或對話關鍵字</label>
+          <input class="kiln-input" id="search-input" type="search" placeholder="例如：太好了、tai hao、なるほど、遲到、拉麵…" oninput="handleSearchInput(this.value)">
+        </div>
+        <div class="toolbar-actions">
+          <button type="button" class="btn" id="pinyin-toggle-btn" aria-pressed="true" onclick="togglePinyinVisibility()">
+            隱藏拼音測讀音
+          </button>
+          <button type="button" class="btn" id="unmastered-toggle-btn" aria-pressed="false" onclick="toggleUnmasteredOnly()">
+            僅看未掌握
+          </button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-pills" id="category-filters" role="group" aria-label="依情境分類篩選"></div>
+        <span class="result-meta" id="result-meta">顯示 10 / 10 個互動詞</span>
+      </div>
+    </section>
+
+    <!-- Cards Container -->
+    <main id="cards-container" class="cards-grid" aria-live="polite"></main>
+
+    <!-- Situational Practice Quiz -->
+    <section class="quiz-section" id="quiz-section" aria-label="情境反應快問快答">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">情境反應小測驗</h2>
+          <p class="section-desc">聽或讀對方的中文情境句，選出最自然道地的台灣華語互動詞回應。</p>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="nextQuizQuestion()">換下一題</button>
+      </div>
+      <div class="quiz-panel" id="quiz-panel"></div>
+    </section>
+
+    <footer class="page-footer">
+      <span>資料來源：《互動詞.pdf》整理｜繁體中文詞條與例句強制鎖定 <code style="font-family: var(--font-label);">zh-TW</code> 語音，日文對應獨立使用 <code style="font-family: var(--font-label);">ja-JP</code> 語音。</span>
+      <span id="tts-diagnostic-note"></span>
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const INTERJECTIONS = [
+      {
+        id: `item-1`,
+        num: `01`,
+        zh: `太好了！`,
+        speakZh: `太好了！`,
+        pinyin: `Tài hǎo le!`,
+        pinyinPlain: `tai hao le`,
+        jp: `よかった！`,
+        speakJp: `よかった！`,
+        category: `喜悅與讚美`,
+        context: `聽到好消息、問題順利解決時使用，表達由衷的開心與鬆一口氣。`,
+        tip: `語氣可上揚帶出欣慰感，常搭配「恭喜你！」、「真替你開心」接續對話。`,
+        dialogue: {
+          a: `我考過 TOCFL A2 了！`,
+          b: `太好了！ 恭喜你！`,
+          highlight: `太好了！`
+        },
+        quizPrompt: `我考過 TOCFL A2 了！`
+      },
+      {
+        id: `item-2`,
+        num: `02`,
+        zh: `真的嗎？ / 真的假的？`,
+        speakZh: `真的嗎？ 真的假的？`,
+        pinyin: `Zhēn de ma? / Zhēn de jiǎ de?`,
+        pinyinPlain: `zhen de ma zhen de jia de`,
+        jp: `本当？／マジで？`,
+        speakJp: `本当？ マジで？`,
+        category: `驚訝與疑惑`,
+        context: `表示驚訝、難以置信。「真的假的？」比「真的嗎？」更口語、更接地氣。`,
+        tip: `對師長或初次見面者建議用「真的嗎？」；與熟識朋友聊天時，「真的假的？」最具台灣生活感。`,
+        dialogue: {
+          a: `台灣的夏天真的很熱，有時候會到 38 度。`,
+          b: `真的假的？ 太熱了吧！`,
+          highlight: `真的假的？`
+        },
+        quizPrompt: `台灣的夏天真的很熱，有時候會到 38 度。`
+      },
+      {
+        id: `item-3`,
+        num: `03`,
+        zh: `原來如此！`,
+        speakZh: `原來如此！`,
+        pinyin: `Yuánlái rúcǐ!`,
+        pinyinPlain: `yuanlai ruci`,
+        jp: `なるほど！`,
+        speakJp: `なるほど！`,
+        category: `理解與贊同`,
+        context: `聽完對方的解釋，終於恍然大悟時使用（對應日語「なるほど」習慣非常直接好記）。`,
+        tip: `日語的「手紙」是書信，但在中文指衛生紙，這類文化差異解釋後非常適合接「原來如此！」。`,
+        dialogue: {
+          a: `因為「手紙」在中文是衛生紙的意思，所以不能亂寫。`,
+          b: `原來如此！ 我以前都不知道。`,
+          highlight: `原來如此！`
+        },
+        quizPrompt: `因為「手紙」在中文是衛生紙的意思，所以不能亂寫。`
+      },
+      {
+        id: `item-4`,
+        num: `04`,
+        zh: `沒錯！ / 對啊！`,
+        speakZh: `沒錯！ 對啊！`,
+        pinyin: `Méi cuò! / Duì a!`,
+        pinyinPlain: `mei cuo dui a`,
+        jp: `そうそう！／その通り！`,
+        speakJp: `そうそう！ その通り！`,
+        category: `理解與贊同`,
+        context: `強烈贊同對方說的話、表達「我完全同意」或確認事實無誤。`,
+        tip: `「對啊！」常帶出感同身受的附和；「沒錯！」則多一分肯定判斷的語氣。`,
+        dialogue: {
+          a: `學中文聲調真的很難對吧？`,
+          b: `沒錯！ 特別是第二聲和第三聲。`,
+          highlight: `沒錯！`
+        },
+        quizPrompt: `學中文聲調真的很難對吧？`
+      },
+      {
+        id: `item-5`,
+        num: `05`,
+        zh: `好厲害！`,
+        speakZh: `好厲害！`,
+        pinyin: `Hǎo lìhai!`,
+        pinyinPlain: `hao lihai`,
+        jp: `すごい！`,
+        speakJp: `すごい！`,
+        category: `喜悅與讚美`,
+        context: `稱讚對方的技能、成果或表現出色。`,
+        tip: `前面加上驚嘆詞「哇，好厲害！」能讓讚美顯得更真誠自然。`,
+        dialogue: {
+          a: `這幅畫是我自己畫的。`,
+          b: `哇，好厲害！ 畫得太漂亮了。`,
+          highlight: `好厲害！`
+        },
+        quizPrompt: `這幅畫是我自己畫的。`
+      },
+      {
+        id: `item-6`,
+        num: `06`,
+        zh: `不會吧！`,
+        speakZh: `不會吧！`,
+        pinyin: `Bú huì ba!`,
+        pinyinPlain: `bu hui ba`,
+        jp: `嘘でしょ？！／まさか！`,
+        speakJp: `嘘でしょ？ まさか！`,
+        category: `驚訝與疑惑`,
+        context: `遇到突發狀況、壞消息，或覺得某件事太不可思議、難以接受時使用。`,
+        tip: `注意「不」在第四聲「會（huì）」前面要變調讀成第二聲「bú」。`,
+        dialogue: {
+          a: `今天的電車又誤點了 30 分鐘。`,
+          b: `不會吧！ 那你上班要遲到了。`,
+          highlight: `不會吧！`
+        },
+        quizPrompt: `今天的電車又誤點了 30 分鐘。`
+      },
+      {
+        id: `item-7`,
+        num: `07`,
+        zh: `好可惜！`,
+        speakZh: `好可惜！`,
+        pinyin: `Hǎo kěxī!`,
+        pinyinPlain: `hao kexi`,
+        jp: `残念！／もったいない！`,
+        speakJp: `残念！ もったいない！`,
+        category: `安慰與遺憾`,
+        context: `錯過機會、事情沒成功或食物/資源浪費時，表達同理與遺憾。`,
+        tip: `語氣放柔一點，常會接著給予正面鼓勵，例如「下次早點去」、「下次還有機會」。`,
+        dialogue: {
+          a: `我想買的那款限量球鞋賣完了。`,
+          b: `啊，好可惜！ 下次早點去排隊。`,
+          highlight: `好可惜！`
+        },
+        quizPrompt: `我想買的那款限量球鞋賣完了。`
+      },
+      {
+        id: `item-8`,
+        num: `08`,
+        zh: `辛苦了！`,
+        speakZh: `辛苦了！`,
+        pinyin: `Xīnkǔ le!`,
+        pinyinPlain: `xinku le`,
+        jp: `お疲れ様！`,
+        speakJp: `お疲れ様！`,
+        category: `安慰與慰勞`,
+        context: `對方下班、完成一項繁重任務或長途奔波時的慰勞用語。`,
+        tip: `不同於日語「お疲れ様でした」常在見面或離開時當作固定問候，中文的「辛苦了！」更聚焦在對方剛完成勞累的事情。`,
+        dialogue: {
+          a: `我剛開完三個小時的跨國會議。`,
+          b: `哇，今天真是辛苦了！ 快休息一下。`,
+          highlight: `辛苦了！`
+        },
+        quizPrompt: `我剛開完三個小時的跨國會議。`
+      },
+      {
+        id: `item-9`,
+        num: `09`,
+        zh: `隨便 / 都好`,
+        speakZh: `隨便。 都好。`,
+        pinyin: `Suíbiàn / Dōu hǎo`,
+        pinyinPlain: `suibian dou hao`,
+        jp: `なんでもいいよ／お任せ`,
+        speakJp: `なんでもいいよ。 お任せ。`,
+        category: `選擇與釋懷`,
+        context: `做選擇時交給對方決定，表示自己沒有特別偏好。`,
+        tip: `重要提醒：中文單說「隨便」有時語氣偏生硬或不耐煩，建議搭配微笑，或改說「我都好」、「你決定就好」會更禮貌親切。`,
+        dialogue: {
+          a: `中午想吃拉麵還是炒飯？`,
+          b: `我都好，看你想吃哪一個。`,
+          highlight: `我都好`
+        },
+        quizPrompt: `中午想吃拉麵還是炒飯？`
+      },
+      {
+        id: `item-10`,
+        num: `10`,
+        zh: `算了吧！`,
+        speakZh: `算了吧！`,
+        pinyin: `Suàn le ba!`,
+        pinyinPlain: `suan le ba`,
+        jp: `もういいや！／諦めよう`,
+        speakJp: `もういいや！ 諦めよう。`,
+        category: `選擇與釋懷`,
+        context: `放棄某件事、不再計較，或勸別人看開一點、換個方案時使用。`,
+        tip: `搭配「那我們換個方法」、「別放在心上」，語氣會顯得灑脫而不消極。`,
+        dialogue: {
+          a: `外面的排隊人潮大概要等兩小時。`,
+          b: `那算了吧！ 我們換一家吃。`,
+          highlight: `算了吧！`
+        },
+        quizPrompt: `外面的排隊人潮大概要等兩小時。`
+      }
+    ];
+
+    const CATEGORIES = [
+      `全部`,
+      `喜悅與讚美`,
+      `驚訝與疑惑`,
+      `理解與贊同`,
+      `安慰與慰勞`,
+      `選擇與釋懷`
+    ];
+
+    const appState = {
+      search: ``,
+      category: `全部`,
+      showPinyin: true,
+      unmasteredOnly: false,
+      masteredIds: [],
+      speechRate: 0.95,
+      selectedZhVoiceURI: ``,
+      quizAnswered: 0,
+      quizCorrect: 0,
+      currentQuizIdx: 0,
+      quizSelectedId: null,
+      quizOptionIds: []
+    };
+
+    let availableVoices = [];
+    let activeSpeakingTag = ``;
+    let speechSequenceToken = 0;
+
+    /* ---------------- TTS Engine (Strict zh-TW vs ja-JP separation) ---------------- */
+
+    function isTaiwanMandarinVoice(voice) {
+      if (!voice || !voice.lang) return false;
+      const lang = voice.lang.toLowerCase().replace(/_/g, `-`);
+      return lang === `zh-tw` || lang === `cmn-tw` || lang === `cmn-hant-tw` || lang === `zh-hant-tw`;
+    }
+
+    function isChineseVoice(voice) {
+      if (!voice || !voice.lang) return false;
+      const lang = voice.lang.toLowerCase().replace(/_/g, `-`);
+      if (lang.startsWith(`ja`)) return false;
+      return lang.startsWith(`zh`) || lang.startsWith(`cmn`);
+    }
+
+    function isJapaneseVoice(voice) {
+      if (!voice || !voice.lang) return false;
+      const lang = voice.lang.toLowerCase().replace(/_/g, `-`);
+      return lang.startsWith(`ja`);
+    }
+
+    function getRankedChineseVoices(voices) {
+      const zhVoices = voices.filter(isChineseVoice);
+      const score = (v) => {
+        const lang = (v.lang || ``).toLowerCase().replace(/_/g, `-`);
+        const name = (v.name || ``).toLowerCase();
+        let s = 0;
+        if (lang === `zh-tw` || lang === `cmn-tw` || lang === `cmn-hant-tw` || lang === `zh-hant-tw`) s += 100;
+        else if (lang.includes(`hant`)) s += 60;
+        else if (lang.startsWith(`zh-cn`) || lang.startsWith(`cmn-hans`) || lang === `zh`) s += 30;
+        else if (lang.startsWith(`zh-hk`) || lang.includes(`yue`)) s += 10;
+        if (name.includes(`taiwan`) || name.includes(`臺灣`) || name.includes(`台灣`) || name.includes(`meijia`) || name.includes(`yating`) || name.includes(`hanhan`) || name.includes(`zhiwei`) || name.includes(`國語`)) s += 20;
+        if (v.localService) s += 5;
+        return s;
+      };
+      return [...zhVoices].sort((a, b) => score(b) - score(a));
+    }
+
+    function pickTaiwanChineseVoice() {
+      const ranked = getRankedChineseVoices(availableVoices);
+      if (appState.selectedZhVoiceURI) {
+        const manual = ranked.find(v => v.voiceURI === appState.selectedZhVoiceURI);
+        if (manual) return manual;
+      }
+      return ranked.length > 0 ? ranked[0] : null;
+    }
+
+    function pickJapaneseVoice() {
+      const jaVoices = availableVoices.filter(isJapaneseVoice);
+      if (jaVoices.length === 0) return null;
+      const exact = jaVoices.find(v => v.lang.toLowerCase().replace(/_/g, `-`) === `ja-jp`);
+      return exact || jaVoices[0];
+    }
+
+    function refreshVoiceCatalog() {
+      if (!(`speechSynthesis` in window)) {
+        updateTtsStatusUI();
+        return;
+      }
+      availableVoices = window.speechSynthesis.getVoices() || [];
+      const selectEl = document.getElementById(`zh-voice-select`);
+      if (selectEl) {
+        const rankedZh = getRankedChineseVoices(availableVoices);
+        selectEl.innerHTML = ``;
+        if (rankedZh.length === 0) {
+          const opt = document.createElement(`option`);
+          opt.value = ``;
+          opt.textContent = `未偵測到中文語音（強制傳送 zh-TW）`;
+          selectEl.appendChild(opt);
+        } else {
+          rankedZh.forEach((voice, idx) => {
+            const opt = document.createElement(`option`);
+            opt.value = voice.voiceURI;
+            const twTag = isTaiwanMandarinVoice(voice) ? `★ 台灣` : voice.lang;
+            opt.textContent = `${voice.name} (${twTag})`;
+            if (appState.selectedZhVoiceURI === voice.voiceURI || (!appState.selectedZhVoiceURI && idx === 0)) {
+              opt.selected = true;
+            }
+            selectEl.appendChild(opt);
+          });
+        }
+      }
+      updateTtsStatusUI();
+    }
+
+    function updateTtsStatusUI() {
+      const zhPill = document.getElementById(`zh-engine-pill`);
+      const jaPill = document.getElementById(`ja-engine-pill`);
+      const diagNote = document.getElementById(`tts-diagnostic-note`);
+
+      if (!(`speechSynthesis` in window)) {
+        if (zhPill) {
+          zhPill.textContent = `中文引擎：瀏覽器不支援 SpeechSynthesis`;
+          zhPill.className = `engine-pill engine-pill--warn`;
+        }
+        if (jaPill) {
+          jaPill.textContent = `日文引擎：瀏覽器不支援`;
+          jaPill.className = `engine-pill engine-pill--warn`;
+        }
+        return;
+      }
+
+      const zhVoice = pickTaiwanChineseVoice();
+      const jaVoice = pickJapaneseVoice();
+
+      if (zhPill) {
+        if (zhVoice) {
+          const isTw = isTaiwanMandarinVoice(zhVoice);
+          zhPill.textContent = `中文引擎：${zhVoice.name} [${zhVoice.lang}]`;
+          zhPill.className = isTw ? `engine-pill engine-pill--ok` : `engine-pill`;
+        } else {
+          zhPill.textContent = `中文引擎：已鎖定 lang='zh-TW'（未裝台灣語音包）`;
+          zhPill.className = `engine-pill engine-pill--warn`;
+        }
+      }
+
+      if (jaPill) {
+        if (jaVoice) {
+          jaPill.textContent = `日文引擎：${jaVoice.name} [${jaVoice.lang}]`;
+          jaPill.className = `engine-pill engine-pill--ok`;
+        } else {
+          jaPill.textContent = `日文引擎：已鎖定 lang='ja-JP'`;
+          jaPill.className = `engine-pill`;
+        }
+      }
+
+      if (diagNote) {
+        if (!zhVoice && availableVoices.length > 0) {
+          diagNote.textContent = `提示：系統尚未安裝中文 TTS 語音包，已禁止回退至日語引擎；請於作業系統語言設定中新增「繁體中文（台灣）」語音。`;
+        } else {
+          diagNote.textContent = `目前語音列表共 ${availableVoices.length} 組，中／日引擎已嚴格隔離。`;
+        }
+      }
+    }
+
+    function stopSpeech() {
+      speechSequenceToken += 1;
+      activeSpeakingTag = ``;
+      if (`speechSynthesis` in window) {
+        window.speechSynthesis.cancel();
+      }
+      clearSpeakingHighlights();
+    }
+
+    function clearSpeakingHighlights() {
+      document.querySelectorAll(`.is-speaking`).forEach(el => el.classList.remove(`is-speaking`));
+      document.querySelectorAll(`.is-card-speaking`).forEach(el => el.classList.remove(`is-card-speaking`));
+      document.querySelectorAll(`.is-line-speaking`).forEach(el => el.classList.remove(`is-line-speaking`));
+    }
+
+    function buildChineseUtterance(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      // 嚴格強制設定繁體台灣華語語系，絕對不允許使用日文或系統非中文引擎
+      utter.lang = `zh-TW`;
+      utter.rate = appState.speechRate;
+      const zhVoice = pickTaiwanChineseVoice();
+      if (zhVoice && isChineseVoice(zhVoice)) {
+        utter.voice = zhVoice;
+      } else {
+        utter.voice = null;
+      }
+      return utter;
+    }
+
+    function buildJapaneseUtterance(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      // 日文對應詞獨立使用 ja-JP 語系與日文引擎
+      utter.lang = `ja-JP`;
+      utter.rate = appState.speechRate;
+      const jaVoice = pickJapaneseVoice();
+      if (jaVoice && isJapaneseVoice(jaVoice)) {
+        utter.voice = jaVoice;
+      } else {
+        utter.voice = null;
+      }
+      return utter;
+    }
+
+    function speakText(langType, text, tag, cardId, lineRole) {
+      if (!(`speechSynthesis` in window)) {
+        const diagNote = document.getElementById(`tts-diagnostic-note`);
+        if (diagNote) diagNote.textContent = `此環境不支援 Web Speech API 語音朗讀。`;
+        return;
+      }
+
+      if (activeSpeakingTag === tag) {
+        stopSpeech();
+        return;
+      }
+
+      stopSpeech();
+      const currentToken = speechSequenceToken;
+      activeSpeakingTag = tag;
+
+      const utter = langType === `ja-JP`
+        ? buildJapaneseUtterance(text)
+        : buildChineseUtterance(text);
+
+      applySpeakingVisuals(tag, cardId, lineRole);
+
+      utter.onend = function () {
+        if (currentToken !== speechSequenceToken) return;
+        activeSpeakingTag = ``;
+        clearSpeakingHighlights();
+      };
+      utter.onerror = function () {
+        if (currentToken !== speechSequenceToken) return;
+        activeSpeakingTag = ``;
+        clearSpeakingHighlights();
+      };
+
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakDialogueSequence(itemId) {
+      const item = INTERJECTIONS.find(i => i.id === itemId);
+      if (!item || !(`speechSynthesis` in window)) return;
+
+      const tag = `dialogue-${itemId}`;
+      if (activeSpeakingTag === tag) {
+        stopSpeech();
+        return;
+      }
+
+      stopSpeech();
+      const currentToken = speechSequenceToken;
+      activeSpeakingTag = tag;
+
+      const utterA = buildChineseUtterance(item.dialogue.a);
+      const utterB = buildChineseUtterance(item.dialogue.b);
+
+      applySpeakingVisuals(tag, itemId, `a`);
+
+      utterA.onend = function () {
+        if (currentToken !== speechSequenceToken) return;
+        clearSpeakingHighlights();
+        applySpeakingVisuals(tag, itemId, `b`);
+        window.speechSynthesis.speak(utterB);
+      };
+      utterA.onerror = function () {
+        if (currentToken !== speechSequenceToken) return;
+        stopSpeech();
+      };
+      utterB.onend = function () {
+        if (currentToken !== speechSequenceToken) return;
+        activeSpeakingTag = ``;
+        clearSpeakingHighlights();
+      };
+      utterB.onerror = function () {
+        if (currentToken !== speechSequenceToken) return;
+        stopSpeech();
+      };
+
+      window.speechSynthesis.speak(utterA);
+    }
+
+    function applySpeakingVisuals(tag, cardId, lineRole) {
+      clearSpeakingHighlights();
+      const btn = document.querySelector(`[data-speak-tag="${tag}"]`);
+      if (btn) btn.classList.add(`is-speaking`);
+      if (cardId) {
+        const card = document.getElementById(`card-${cardId}`);
+        if (card) card.classList.add(`is-card-speaking`);
+        if (lineRole) {
+          const lineEl = document.getElementById(`line-${cardId}-${lineRole}`);
+          if (lineEl) lineEl.classList.add(`is-line-speaking`);
+        }
+      }
+    }
+
+    /* ---------------- Event Handlers (Hoisted function declarations) ---------------- */
+
+    function handleVoiceChange(uri) {
+      appState.selectedZhVoiceURI = uri;
+      updateTtsStatusUI();
+      savePersistedState();
+    }
+
+    function handleRateChange(val) {
+      const parsed = parseFloat(val);
+      if (!Number.isNaN(parsed)) {
+        appState.speechRate = parsed;
+        savePersistedState();
+      }
+    }
+
+    function handleSearchInput(val) {
+      appState.search = val.trim();
+      renderCards();
+    }
+
+    function selectCategory(cat) {
+      appState.category = cat;
+      renderFilters();
+      renderCards();
+    }
+
+    function togglePinyinVisibility() {
+      appState.showPinyin = !appState.showPinyin;
+      const btn = document.getElementById(`pinyin-toggle-btn`);
+      if (btn) {
+        btn.setAttribute(`aria-pressed`, String(appState.showPinyin));
+        btn.textContent = appState.showPinyin ? `隱藏拼音測讀音` : `顯示全部拼音`;
+        btn.classList.toggle(`is-active`, !appState.showPinyin);
+      }
+      renderCards();
+      savePersistedState();
+    }
+
+    function toggleUnmasteredOnly() {
+      appState.unmasteredOnly = !appState.unmasteredOnly;
+      const btn = document.getElementById(`unmastered-toggle-btn`);
+      if (btn) {
+        btn.setAttribute(`aria-pressed`, String(appState.unmasteredOnly));
+        btn.classList.toggle(`is-active`, appState.unmasteredOnly);
+      }
+      renderCards();
+    }
+
+    function toggleMastered(itemId) {
+      const idx = appState.masteredIds.indexOf(itemId);
+      if (idx === -1) {
+        appState.masteredIds.push(itemId);
+      } else {
+        appState.masteredIds.splice(idx, 1);
+      }
+      updateSummaryStats();
+      renderCards();
+      savePersistedState();
+    }
+
+    function resetFilters() {
+      appState.search = ``;
+      appState.category = `全部`;
+      appState.unmasteredOnly = false;
+      const searchEl = document.getElementById(`search-input`);
+      if (searchEl) searchEl.value = ``;
+      const unmasteredBtn = document.getElementById(`unmastered-toggle-btn`);
+      if (unmasteredBtn) {
+        unmasteredBtn.setAttribute(`aria-pressed`, `false`);
+        unmasteredBtn.classList.remove(`is-active`);
+      }
+      renderFilters();
+      renderCards();
+    }
+
+    function speakCardZh(itemId) {
+      const item = INTERJECTIONS.find(i => i.id === itemId);
+      if (!item) return;
+      speakText(`zh-TW`, item.speakZh, `zh-${itemId}`, itemId, null);
+    }
+
+    function speakCardJp(itemId) {
+      const item = INTERJECTIONS.find(i => i.id === itemId);
+      if (!item) return;
+      speakText(`ja-JP`, item.speakJp, `jp-${itemId}`, itemId, null);
+    }
+
+    function speakDialogueLine(itemId, role) {
+      const item = INTERJECTIONS.find(i => i.id === itemId);
+      if (!item) return;
+      const lineText = role === `a` ? item.dialogue.a : item.dialogue.b;
+      speakText(`zh-TW`, lineText, `line-${itemId}-${role}`, itemId, role);
+    }
+
+    function speakQuizPrompt() {
+      const item = INTERJECTIONS[appState.currentQuizIdx];
+      if (!item) return;
+      speakText(`zh-TW`, item.quizPrompt, `quiz-prompt`, null, null);
+    }
+
+    function speakQuizAnswer(itemId) {
+      const item = INTERJECTIONS.find(i => i.id === itemId);
+      if (!item) return;
+      speakText(`zh-TW`, item.dialogue.b, `quiz-answer`, null, null);
+    }
+
+    function scrollToQuiz() {
+      const el = document.getElementById(`quiz-section`);
+      if (el) el.scrollIntoView({ behavior: `smooth` });
+    }
+
+    function handleResetProgress(btn) {
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `再點一次確認重設`;
+        btn.classList.add(`btn-cinnabar`);
+        setTimeout(() => {
+          if (btn.dataset.armed === `true`) {
+            btn.dataset.armed = `false`;
+            btn.textContent = `重設紀錄`;
+            btn.classList.remove(`btn-cinnabar`);
+          }
+        }, 3500);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `重設紀錄`;
+      btn.classList.remove(`btn-cinnabar`);
+      appState.masteredIds = [];
+      appState.quizAnswered = 0;
+      appState.quizCorrect = 0;
+      updateSummaryStats();
+      renderCards();
+      nextQuizQuestion();
+      savePersistedState();
+    }
+
+    /* ---------------- Rendering ---------------- */
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`);
+    }
+
+    function formatHighlightedDialogue(line, highlightPhrase) {
+      const escapedLine = escapeHtml(line);
+      const escapedTarget = escapeHtml(highlightPhrase);
+      if (!escapedTarget || !escapedLine.includes(escapedTarget)) {
+        return escapedLine;
+      }
+      return escapedLine.replace(escapedTarget, `<mark>${escapedTarget}</mark>`);
+    }
+
+    function getFilteredItems() {
+      const q = appState.search.toLowerCase();
+      return INTERJECTIONS.filter(item => {
+        if (appState.category !== `全部` && item.category !== appState.category) {
+          return false;
+        }
+        if (appState.unmasteredOnly && appState.masteredIds.includes(item.id)) {
+          return false;
+        }
+        if (!q) return true;
+        const haystack = [
+          item.zh,
+          item.pinyin,
+          item.pinyinPlain,
+          item.jp,
+          item.category,
+          item.context,
+          item.tip,
+          item.dialogue.a,
+          item.dialogue.b
+        ].join(` `).toLowerCase();
+        return haystack.includes(q);
+      });
+    }
+
+    function renderFilters() {
+      const container = document.getElementById(`category-filters`);
+      if (!container) return;
+      container.innerHTML = CATEGORIES.map(cat => {
+        const count = cat === `全部`
+          ? INTERJECTIONS.length
+          : INTERJECTIONS.filter(i => i.category === cat).length;
+        const pressed = appState.category === cat ? `true` : `false`;
+        return `<button type="button" class="filter-chip" aria-pressed="${pressed}" onclick="selectCategory('${cat}')">${escapeHtml(cat)} <span class="chip-count">${count}</span></button>`;
+      }).join(``);
+    }
+
+    function renderCards() {
+      const container = document.getElementById(`cards-container`);
+      const metaEl = document.getElementById(`result-meta`);
+      if (!container) return;
+
+      const filtered = getFilteredItems();
+      if (metaEl) {
+        metaEl.textContent = `顯示 ${filtered.length} / ${INTERJECTIONS.length} 個互動詞`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>找不到符合條件的互動詞</h3>
+            <p>目前沒有項目符合「${escapeHtml(appState.search || appState.category)}」的篩選條件。你可以清除搜尋關鍵字或切換回全部情境分類。</p>
+            <button type="button" class="btn btn-primary" onclick="resetFilters()">顯示全部 10 個互動詞</button>
+          </div>
+        `;
+        return;
+      }
+
+      const pinyinClass = appState.showPinyin ? `` : ` pinyin-hidden`;
+
+      container.innerHTML = filtered.map(item => {
+        const isMastered = appState.masteredIds.includes(item.id);
+        const masteredClass = isMastered ? ` is-mastered` : ``;
+        const speakerIcon = `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`;
+        const playAllIcon = `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+        const checkIcon = `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+        return `
+          <div class="card-wrapper">
+            <article class="phrase-card${masteredClass}${pinyinClass}" id="card-${item.id}">
+              <div class="card-meta-row">
+                <div class="card-meta-left">
+                  <span class="index-tag">NO. ${item.num}</span>
+                  <span class="category-tag">${escapeHtml(item.category)}</span>
+                </div>
+                <button type="button" class="mastery-btn" aria-pressed="${isMastered}" onclick="toggleMastered('${item.id}')">
+                  ${isMastered ? checkIcon : ``}
+                  <span>${isMastered ? `已掌握` : `標記掌握`}</span>
+                </button>
+              </div>
+
+              <div class="phrase-header">
+                <div>
+                  <h2 class="phrase-zh">${escapeHtml(item.zh)}</h2>
+                  <p class="phrase-pinyin">${escapeHtml(item.pinyin)}</p>
+                </div>
+                <button type="button" class="btn btn-primary" data-speak-tag="zh-${item.id}" onclick="speakCardZh('${item.id}')" aria-label="朗讀中文互動詞 ${escapeHtml(item.zh)}">
+                  ${speakerIcon}
+                  <span>朗讀中文</span>
+                </button>
+              </div>
+
+              <div class="jp-strip">
+                <div class="jp-copy">
+                  <span class="jp-label">日文對應表現（ja-JP）</span>
+                  <span class="jp-text" lang="ja">${escapeHtml(item.jp)}</span>
+                </div>
+                <button type="button" class="btn btn-ghost btn-compact" data-speak-tag="jp-${item.id}" onclick="speakCardJp('${item.id}')" aria-label="朗讀日文對應 ${escapeHtml(item.jp)}">
+                  ${speakerIcon}
+                  <span>日文發音</span>
+                </button>
+              </div>
+
+              <div class="context-block">
+                <p class="section-mini-label">適用時機與語氣提示</p>
+                <p class="context-text">${escapeHtml(item.context)}<br><span style="color: var(--secondary); font-size: 0.875rem;">${escapeHtml(item.tip)}</span></p>
+              </div>
+
+              <div class="dialogue-box">
+                <div class="dialogue-head">
+                  <span class="section-mini-label">生活化情境對話（zh-TW）</span>
+                  <button type="button" class="btn btn-moss btn-compact" data-speak-tag="dialogue-${item.id}" onclick="speakDialogueSequence('${item.id}')">
+                    ${playAllIcon}
+                    <span>朗讀對話 A＋B</span>
+                  </button>
+                </div>
+                <div class="dialogue-lines">
+                  <div class="dialogue-line" id="line-${item.id}-a">
+                    <span class="speaker-badge speaker-badge--a" aria-label="角色 A">A</span>
+                    <span class="dialogue-utterance">${escapeHtml(item.dialogue.a)}</span>
+                    <button type="button" class="line-play-btn" data-speak-tag="line-${item.id}-a" onclick="speakDialogueLine('${item.id}', 'a')" aria-label="朗讀角色 A 台詞">
+                      ${speakerIcon}
+                    </button>
+                  </div>
+                  <div class="dialogue-line" id="line-${item.id}-b">
+                    <span class="speaker-badge speaker-badge--b" aria-label="角色 B">B</span>
+                    <span class="dialogue-utterance">${formatHighlightedDialogue(item.dialogue.b, item.dialogue.highlight)}</span>
+                    <button type="button" class="line-play-btn" data-speak-tag="line-${item.id}-b" onclick="speakDialogueLine('${item.id}', 'b')" aria-label="朗讀角色 B 台詞">
+                      ${speakerIcon}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function updateSummaryStats() {
+      const masteredCountEl = document.getElementById(`mastered-count`);
+      const masteredBarEl = document.getElementById(`mastered-bar`);
+      const masteredNoteEl = document.getElementById(`mastered-note`);
+      const quizScoreEl = document.getElementById(`quiz-score-display`);
+      const quizAccEl = document.getElementById(`quiz-accuracy-note`);
+
+      const done = appState.masteredIds.length;
+      const total = INTERJECTIONS.length;
+
+      if (masteredCountEl) masteredCountEl.textContent = `${done} / ${total}`;
+      if (masteredBarEl) masteredBarEl.style.width = `${Math.round((done / total) * 100)}%`;
+      if (masteredNoteEl) {
+        masteredNoteEl.textContent = done === total
+          ? `太好了！10 個核心互動詞已全數掌握`
+          : `點擊卡片右上角標記已熟練`;
+      }
+
+      if (quizScoreEl) quizScoreEl.textContent = `${appState.quizCorrect} / ${appState.quizAnswered}`;
+      if (quizAccEl) {
+        if (appState.quizAnswered === 0) {
+          quizAccEl.textContent = `下方提供 10 題即測練習`;
+        } else {
+          const pct = Math.round((appState.quizCorrect / appState.quizAnswered) * 100);
+          quizAccEl.textContent = `目前答對率 ${pct}%`;
+        }
+      }
+    }
+
+    /* ---------------- Quiz Engine ---------------- */
+
+    function setupQuizQuestion(idx) {
+      appState.currentQuizIdx = idx;
+      appState.quizSelectedId = null;
+      const correct = INTERJECTIONS[idx];
+      const pool = INTERJECTIONS.filter(i => i.id !== correct.id);
+      // Deterministic-feeling shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = pool[i];
+        pool[i] = pool[j];
+        pool[j] = temp;
+      }
+      const options = [correct, pool[0], pool[1], pool[2]];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = options[i];
+        options[i] = options[j];
+        options[j] = temp;
+      }
+      appState.quizOptionIds = options.map(o => o.id);
+      renderQuiz();
+    }
+
+    function nextQuizQuestion() {
+      const nextIdx = (appState.currentQuizIdx + 1) % INTERJECTIONS.length;
+      setupQuizQuestion(nextIdx);
+    }
+
+    function selectQuizOption(chosenId) {
+      if (appState.quizSelectedId !== null) return;
+      appState.quizSelectedId = chosenId;
+      const target = INTERJECTIONS[appState.currentQuizIdx];
+      appState.quizAnswered += 1;
+      if (chosenId === target.id) {
+        appState.quizCorrect += 1;
+      }
+      updateSummaryStats();
+      renderQuiz();
+      savePersistedState();
+    }
+
+    function renderQuiz() {
+      const panel = document.getElementById(`quiz-panel`);
+      if (!panel) return;
+      const target = INTERJECTIONS[appState.currentQuizIdx];
+      const options = appState.quizOptionIds
+        .map(id => INTERJECTIONS.find(i => i.id === id))
+        .filter(Boolean);
+
+      const speakerIcon = `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+
+      const answered = appState.quizSelectedId !== null;
+      const isRight = answered && appState.quizSelectedId === target.id;
+
+      const optionsHtml = options.map(opt => {
+        let cls = `quiz-opt-btn`;
+        if (answered) {
+          if (opt.id === target.id) cls += ` is-correct`;
+          else if (opt.id === appState.quizSelectedId) cls += ` is-wrong`;
+        }
+        return `
+          <button type="button" class="${cls}" ${answered ? `disabled` : ``} onclick="selectQuizOption('${opt.id}')">
+            <span class="quiz-opt-main">${escapeHtml(opt.zh)}</span>
+            <span class="quiz-opt-sub">${escapeHtml(opt.jp)}</span>
+          </button>
+        `;
+      }).join(``);
+
+      const feedbackHtml = answered
+        ? `
+          <div class="quiz-feedback ${isRight ? `is-correct` : `is-wrong`}">
+            <strong>${isRight ? `答對了！語感非常自然。` : `這題更適合用「${escapeHtml(target.zh)}」回應。`}</strong>
+            <span>完整例句 B：${escapeHtml(target.dialogue.b)}（${escapeHtml(target.context)}）</span>
+            <div>
+              <button type="button" class="btn btn-moss btn-compact" data-speak-tag="quiz-answer" onclick="speakQuizAnswer('${target.id}')">
+                ${speakerIcon}
+                <span>朗讀正確回應</span>
+              </button>
+            </div>
+          </div>
+        `
+        : `<p class="card-kicker" style="margin-top: var(--space-sm);">請從右側選出最適合的中文互動詞回應</p>`;
+
+      panel.innerHTML = `
+        <div class="quiz-prompt-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm); flex-wrap: wrap;">
+            <span class="card-kicker">第 ${appState.currentQuizIdx + 1} / ${INTERJECTIONS.length} 題｜朋友 A 說：</span>
+            <button type="button" class="btn btn-ghost btn-compact" data-speak-tag="quiz-prompt" onclick="speakQuizPrompt()">
+              ${speakerIcon}
+              <span>聽題目發音</span>
+            </button>
+          </div>
+          <p class="quiz-situation-line">「${escapeHtml(target.quizPrompt)}」</p>
+          ${feedbackHtml}
+        </div>
+        <div class="quiz-options">
+          ${optionsHtml}
+        </div>
+      `;
+    }
+
+    /* ---------------- Persistence via notebookAppApi ---------------- */
+
+    async function savePersistedState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.setAppState !== `function`) return;
+      try {
+        await window.notebookAppApi.setAppState({
+          masteredIds: appState.masteredIds,
+          showPinyin: appState.showPinyin,
+          speechRate: appState.speechRate,
+          selectedZhVoiceURI: appState.selectedZhVoiceURI,
+          quizAnswered: appState.quizAnswered,
+          quizCorrect: appState.quizCorrect
+        });
+      } catch (err) {
+        // Ignore persistence errors silently in non-host environments
+      }
+    }
+
+    async function loadPersistedState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.getAppState !== `function`) return;
+      try {
+        const saved = await window.notebookAppApi.getAppState();
+        if (saved && typeof saved === `object`) {
+          if (Array.isArray(saved.masteredIds)) appState.masteredIds = saved.masteredIds;
+          if (typeof saved.showPinyin === `boolean`) appState.showPinyin = saved.showPinyin;
+          if (typeof saved.speechRate === `number`) appState.speechRate = saved.speechRate;
+          if (typeof saved.selectedZhVoiceURI === `string`) appState.selectedZhVoiceURI = saved.selectedZhVoiceURI;
+          if (typeof saved.quizAnswered === `number`) appState.quizAnswered = saved.quizAnswered;
+          if (typeof saved.quizCorrect === `number`) appState.quizCorrect = saved.quizCorrect;
+        }
+      } catch (err) {
+        // Fallback to default state
+      }
+    }
+
+    function syncControlsFromState() {
+      const rateEl = document.getElementById(`rate-select`);
+      if (rateEl) rateEl.value = String(appState.speechRate);
+
+      const pinyinBtn = document.getElementById(`pinyin-toggle-btn`);
+      if (pinyinBtn) {
+        pinyinBtn.setAttribute(`aria-pressed`, String(appState.showPinyin));
+        pinyinBtn.textContent = appState.showPinyin ? `隱藏拼音測讀音` : `顯示全部拼音`;
+        pinyinBtn.classList.toggle(`is-active`, !appState.showPinyin);
+      }
+    }
+
+    /* ---------------- Init ---------------- */
+
+    async function initApp() {
+      await loadPersistedState();
+      syncControlsFromState();
+
+      if (`speechSynthesis` in window) {
+        refreshVoiceCatalog();
+        window.speechSynthesis.onvoiceschanged = refreshVoiceCatalog;
+      } else {
+        updateTtsStatusUI();
+      }
+
+      renderFilters();
+      renderCards();
+      updateSummaryStats();
+      setupQuizQuestion(0);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
